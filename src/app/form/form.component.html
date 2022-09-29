@@ -1,0 +1,107 @@
+<app-header></app-header>
+
+<div class="form-content">
+    <form class="form" action="#">
+        <div class="form-head">Employee Payroll Form</div>
+        <div class="row-content">
+            <label class="label text" for="name"> Name </label>
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]="employee.name" [ngModelOptions]="{standalone:true}" name="name"
+                    placeholder="Employee Name">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+
+            </mat-form-field>
+        </div>
+
+        <!-- Added profile pics for custom faces ---->
+        <div class="row-content">
+            <div class="profile-radio-content">
+                <label class="label text" for="profile">Profile Image</label>
+                <mat-radio-group [(ngModel)]="employee.profilePic" [ngModelOptions]="{standalone:true}" ngDefaultControl
+                    aria-label="Select an option" class="profilePic">
+
+                    <mat-radio-button value="./assets/pic1.png"><img class="profile" id='image1'
+                            src="./assets/pic1.png"></mat-radio-button>
+                    <mat-radio-button value="./assets/pic2.png"><img class="profile" id='image2'
+                            src="./assets/pic2.png"></mat-radio-button>
+                    <mat-radio-button value="./assets/pic3.png"><img class="profile" id='image3'
+                            src="./assets/pic3.png"></mat-radio-button>
+                    <mat-radio-button value="./assets/pic4.png"><img class="profile" id='image4'
+                            src="./assets/pic4.png"></mat-radio-button>
+                </mat-radio-group>
+
+            </div>
+        </div>
+
+        <!-- Gender ,department, Salary -->
+        <div class="row-content">
+            <mat-radio-group [(ngModel)]="employee.gender" [ngModelOptions]="{standalone:true}" ngDefaultControl>
+                <label class="label text">Gender</label>
+                <mat-radio-button class="gender-radio" value="male">Male</mat-radio-button>
+                <mat-radio-button class="gender-radio" value="female">Female</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="department">Department</label>
+                <section >
+                    <div class="department-checkbox" *ngFor="let d of depart;let i = index">
+                        <mat-checkbox value="d.name" (change)="checkBoxChange($event, d.name)" (ngModel)="d.name"
+                            [ngModelOptions]="{standalone:true}">{{d.name}}</mat-checkbox>
+                    </div>
+                    <!-- <mat-checkbox class="department-checkbox">Sales</mat-checkbox>
+                    <mat-checkbox class="department-checkbox">Finance</mat-checkbox>
+                    <mat-checkbox class="department-checkbox">Engineer</mat-checkbox>
+                    <mat-checkbox class="department-checkbox">Others</mat-checkbox> -->
+                </section>
+
+            </div>
+       
+        <div class="row-content">
+            <label class="label text" for="salary">Choose your Salary: </label>
+            <mat-form-field appearance="outline">
+                <mat-label>Select Salary</mat-label>
+                <mat-select disableRipple [(ngModel)]="employee.salary" [ngModelOptions]="{standalone:true}"
+                    ngDefaultControl>
+                    <mat-option value="25000">250000</mat-option>
+                    <mat-option value="30000">300000</mat-option>
+                    <mat-option value="35000">350000</mat-option>
+                    <mat-option value="40000">400000</mat-option>
+                    <mat-option value="45000">450000</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Adding Start Date -->
+        <div class="row-content">
+            <label class="label text" for="startDate"> Start Date </label>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="employee.startDate" [ngModelOptions]="{standalone: true}"ngDefaultControl name="date">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="notes">Notes</label>
+            <textarea id="notes" class="input" name="Notes" placeholder="" style="height:100px"
+                [(ngModel)]="employee.notes" [ngModelOptions]="{standalone:true}"></textarea>
+        </div>
+
+        <div class="buttonParent">
+            <div class="buttonParent">
+                <button mat-button type="cancle" class="button submitButton cancelButton"
+                    routerLink="/dashboard">Cancel</button>
+                <div class="submit-reset">
+                    <button mat-button type="submit" class="button submitButton"  *ngIf="this.Id==null" (click)="addEmployee()">Submit</button>
+                    <button mat-button type="submit" class="button submitButton" *ngIf="this.Id!=null" (click)="updateEmployeeData()">Update</button>
+                    <button mat-button type="reset" class="button resetButton">Reset</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
