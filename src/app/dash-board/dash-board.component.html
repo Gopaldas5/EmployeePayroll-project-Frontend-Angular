@@ -1,0 +1,45 @@
+
+<app-header></app-header>
+
+<div class="main-content">
+    <div class="header-content">
+        <div class="emp-details-text"> Employee Details 
+            <div class="emp-count">{{employeeCount}}</div>
+        </div>
+        <!-- <button mat-raised-button color="warn"  (click)="btnClick()"><img src="./assets/add-24px.svg"> Add User </button> -->
+        <button mat-raised-button color="warn"   routerLink="/form"><img src="./assets/add-24px.svg"> Add User </button>
+    </div>
+    <div class="table-main">
+        <table id="display" class="table">
+            <tr>
+                <th>id</th>
+                <th>ProfilePic</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Departments</th>
+                <th>Notes</th>
+                <th>Salary</th>
+                <th>StartDate</th>
+                <th>Action</th> 
+            </tr>
+            <tr *ngFor=" let employee of allEmploy">
+                <td>{{employee.id}}</td>
+                <td>
+                    <img [src]="employee.profilePic" alt="">
+                </td>
+                <td>{{employee.name}}</td>
+                <td>{{employee.gender}}</td>
+                <td>{{employee.departments}}</td>
+                <td>{{employee.notes}}</td>
+                <td>{{employee.salary}}</td>
+                <td>{{employee.startDate | date}}</td>
+                <td>
+                    <img src="./assets/create-black-18dp.svg" (click)="editById(employee.id) " />
+                    <img src=" ./assets/delete-black-18dp.svg"(click)="deleteById(employee.id)"/>
+                </td>
+            </tr>
+            
+        </table>
+    </div>
+
+</div>
